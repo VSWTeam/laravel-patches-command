@@ -1,9 +1,9 @@
 <?php
 
-namespace Vswteam\Skeleton\Tests;
+namespace Vswteam\LaravelPatchesCommand\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Vswteam\Skeleton\SkeletonServiceProvider;
+use Vswteam\LaravelPatchesCommand\LaravelPatchesCommandServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -11,17 +11,20 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        //
+        $this->artisan('migrate', [
+            '--database' => 'sqlite',
+            '--realpath' => realpath(__DIR__.'/../database/factories'),
+        ]);
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            LaravelPatchesCommandServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
@@ -30,9 +33,7 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        include_once __DIR__ . '/../database/migrations/create_laravel_patches_command_table.php.stub';
+        (new \CreateLaravelPatchesCommandTable())->up();
     }
 }

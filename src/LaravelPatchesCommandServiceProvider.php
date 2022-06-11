@@ -1,24 +1,20 @@
 <?php
 
-namespace Vswteam\Skeleton;
+namespace Vswteam\LaravelPatchesCommand;
 
 use Illuminate\Support\ServiceProvider;
-use Vswteam\Skeleton\Commands\SkeletonCommand;
+use Vswteam\LaravelPatchesCommand\Commands\PatchesCommand;
 
-class SkeletonServiceProvider extends ServiceProvider
+class LaravelPatchesCommandServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/skeleton.php' => config_path('skeleton.php'),
+                __DIR__ . '/../config/laravel-patches-command.php' => config_path('laravel-patches-command.php'),
             ], 'config');
 
-            $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/skeleton'),
-            ], 'views');
-
-            $migrationFileName = 'create_skeleton_table.php';
+            $migrationFileName = 'create_laravel_patches_command_table.php';
             if (! $this->migrationFileExists($migrationFileName)) {
                 $this->publishes([
                     __DIR__ . "/../database/migrations/{$migrationFileName}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName),
@@ -26,16 +22,14 @@ class SkeletonServiceProvider extends ServiceProvider
             }
 
             $this->commands([
-                SkeletonCommand::class,
+                PatchesCommand::class,
             ]);
         }
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'skeleton');
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/skeleton.php', 'skeleton');
+        $this->mergeConfigFrom(__DIR__ . '/../config/laravel-patches-command.php', 'laravel-patches-command');
     }
 
     public static function migrationFileExists(string $migrationFileName): bool

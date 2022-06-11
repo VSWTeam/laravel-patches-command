@@ -1,15 +1,15 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "vswteam/laravel-patches-command",
+    "description": "Execute patches command once",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "vswteam",
+        "laravel-patches-command"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/vswteam/laravel-patches-command",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
+            "name": "Nox Wang",
             "homepage": "https://github.com/vswteam",
             "role": "Developer"
         }
@@ -23,13 +23,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Vswteam\\Skeleton\\": "src",
-            "Vswteam\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Vswteam\\LaravelPatchesCommand\\": "src",
+            "Vswteam\\LaravelPatchesCommand\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vswteam\\Skeleton\\Tests\\": "tests"
+            "Vswteam\\LaravelPatchesCommand\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Vswteam\\Skeleton\\SkeletonServiceProvider"
+                "Vswteam\\LaravelPatchesCommand\\LaravelPatchesCommandServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Vswteam\\Skeleton\\SkeletonFacade"
+                "LaravelPatchesCommand": "Vswteam\\LaravelPatchesCommand\\LaravelPatchesCommandFacade"
             }
         }
     },
