@@ -2,8 +2,8 @@
 
 namespace Vswteam\Skeleton\Tests;
 
-use Vswteam\Skeleton\SkeletonServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vswteam\Skeleton\SkeletonServiceProvider;
 
 class TestCase extends Orchestra
 {
